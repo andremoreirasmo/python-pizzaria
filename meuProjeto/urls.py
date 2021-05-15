@@ -1,4 +1,4 @@
-"""App URL Configuration
+"""meuProjeto URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import home
+from .views import home, areaRestrita
 
 
 #so temos a pagina admin por hora
 
 urlpatterns = [
     path('', home),
-    path('admin/', admin.site.urls),
+    path('areaRestrita/', areaRestrita),
+    path('admin/', admin.site.urls),    
 ]

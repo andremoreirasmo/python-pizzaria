@@ -1,18 +1,20 @@
-Criar env
+#Projeto Pizzaria
+Projeto pizzaria simples feito em Django
+
+#Criar env
 python3 -m venv env
 
-Rodar server
-python3 manage.py runserver
-
-Criar usuario
+#Criar usuario
 python3 manage.py createsuperuser
 
-criar app
+#criar app
 django-admin startapp <nomedoapp>
 
-Ao criar novo model
-python3 manage.py makemigrations
-python3 manage.py migrate
+#Rodar server
+python3 manage.py runserver
 
-Criar super user
-python3 manage.py createsuperuser
+#Criar migrattions
+python3 manage.py makemigrations
+
+#Rodar migrates
+python3 manage.py migrate
