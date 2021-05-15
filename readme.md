@@ -1,5 +1,5 @@
 #Projeto Pizzaria
-Projeto pizzaria simples feito em Django
+Projeto pizzaria simples feito em Django.
 
 #Criar env
 python3 -m venv env
