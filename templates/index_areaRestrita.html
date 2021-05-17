@@ -43,14 +43,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">
-                Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href="areaRestrita">Área restrita</a>
+              <a class="nav-link" href="/"> Home </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/areaRestrita/"
+                >Área restrita<span class="sr-only">(current)</span></a
+              >
             </li>
           </ul>
         </div>
@@ -58,110 +57,138 @@
     </nav>
     <!-- Page Content-->
     <div class="container">
+      <br />
       <div class="row">
-        <div class="col-lg-12">
-          <div
-            class="carousel slide my-4"
-            id="carouselExampleIndicators"
-            data-ride="carousel"
-          >
-            <ol class="carousel-indicators">
-              <li
-                class="active"
-                data-target="#carouselExampleIndicators"
-                data-slide-to="0"
-              ></li>
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="1"
-              ></li>
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="2"
-              ></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-              <div class="carousel-item active">
-                <img
-                  class="d-block img-fluid"
-                  src="https://fakeimg.pl/1110x350/?text=1-1110x350"
-                  alt="First slide"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="d-block img-fluid"
-                  src="https://fakeimg.pl/1110x350/?text=2-1110x350"
-                  alt="Second slide"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="d-block img-fluid"
-                  src="https://fakeimg.pl/1110x350/?text=3-1110x350"
-                  alt="Third slide"
-                />
-              </div>
-            </div>
-            <a
-              class="carousel-control-prev"
-              href="#carouselExampleIndicators"
-              role="button"
-              data-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a
-              class="carousel-control-next"
-              href="#carouselExampleIndicators"
-              role="button"
-              data-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-          <div class="row">
-            {%for pizza in pizzas %}
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#!"
-                  ><img
-                    class="card-img-top"
-                    src="https://via.placeholder.com/700x400"
-                    alt="..."
-                /></a>
-                <div class="card-body">
-                  <h4 class="card-title"><a href="#!">{{pizza.name}}</a></h4>
-                  <h5>R$ {{pizza.value}}</h5>
-                  <p class="card-text">{{pizza.detail}}</p>
-                </div>
-                <div class="card-footer">
-                  <div class="float-right">
-                    <button type="button" class="btn btn-primary">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-success">
-                      Comprar
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <h2>Clientes:</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Telefone</th>
+              <th scope="col">Endereço</th>
+              <th scope="col">Email</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for client in clients %}
+            <tr>
+              <th scope="row">{{client.id}}</th>
+              <td>{{client.name}}</td>
+              <td>{{client.telephone}}</td>
+              <td>{{client.address}}</td>
+              <td>{{client.email}}</td>
+              <td>
+                <a
+                  class="btn btn-outline-primary"
+                  href="/admin/clientes/client/{{client.id}}/change/"
+                  ><i class="fas fa-edit"></i
+                ></a>
+                <a
+                  class="btn btn-outline-danger"
+                  href="/admin/clientes/client/{{client.id}}/delete/"
+                  ><i class="fas fa-trash-alt"></i
+                ></a>
+              </td>
+            </tr>
             {% endfor %}
-          </div>
-        </div>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <div class="row">
+        <h2>Pedidos:</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Pizza</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for order in orders %}
+            <tr>
+              <th scope="row">{{order.id}}</th>
+              <td>{% for pizza in order.pizzas.all %} {{pizza}}; {%endfor%}</td>
+              <td>
+                {% for client in order.clients.all %} {{client}}; {%endfor%}
+              </td>
+              <td>{{order.amount}}</td>
+              <td>{{order.value}}</td>
+              <td>{{order.status}}</td>
+              <td>
+                <a
+                  class="btn btn-outline-primary"
+                  href="/admin/Order/order/{{order.id}}/change/"
+                  ><i class="fas fa-edit"></i
+                ></a>
+                <a
+                  class="btn btn-outline-danger"
+                  href="/admin/Order/order/{{order.id}}/delete/"
+                  ><i class="fas fa-trash-alt"></i
+                ></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <div class="row">
+        <h2>Pizzas:</h2>
+        <table class="table table-striped table-image">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Foto</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Detalhe</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for pizza in pizzas %}
+            <tr>
+              <th scope="row">{{pizza.id}}</th>
+              <td class="w-25">
+                <img
+                  class="card-img-top"
+                  src={% static pizza.photo %}
+                  alt="..."
+                />
+              </td>
+              <td>{{pizza.name}}</td>
+              <td>{{pizza.value}}</td>
+              <td>{{pizza.detail}}</td>
+              <td>
+                <a
+                  class="btn btn-outline-primary"
+                  href="/admin/Pizza/pizza/{{pizza.id}}/change/"
+                  ><i class="fas fa-edit"></i
+                ></a>
+                <a
+                  class="btn btn-outline-danger"
+                  href="/admin/Pizza/pizza/{{pizza.id}}/delete/"
+                  ><i class="fas fa-trash-alt"></i
+                ></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br />
+        <br />
       </div>
     </div>
     <!-- Footer-->
-    <footer class="fixed-bottom py-5 bg-dark">
+    <footer class="py-3 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">
           Copyright &copy; André Luis Moreira 2021

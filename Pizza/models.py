@@ -6,7 +6,7 @@ class Pizza(models.Model):
     value = models.FloatField(null=False, help_text='Valor')
     detail = models.CharField(
         max_length=500, help_text='Sabor ou qualquer outra informação.', null=True)
-    photo = models.ImageField(upload_to='media', default='default.jpg')
+    photo = models.ImageField(upload_to='media', default='media/default.jpg')
 
     def __str__(self):
         return self.name
